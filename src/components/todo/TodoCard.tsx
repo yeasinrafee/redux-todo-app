@@ -3,17 +3,24 @@ import { Button } from '../ui/button';
 import { removeTodo, toggleComplete } from '@/redux/features/todoSlice';
 
 type TTodoCardProps = {
-  id: string;
+  _id: string;
   title: string;
   description: string;
   isCompleted?: boolean;
+  priority: string;
 };
 
-const TodoCard = ({ title, description, id, isCompleted }: TTodoCardProps) => {
+const TodoCard = ({
+  title,
+  description,
+  _id,
+  isCompleted,
+  priority,
+}: TTodoCardProps) => {
   const dispatch = useAppDispatch();
 
   const toggleState = () => {
-    dispatch(toggleComplete(id));
+    dispatch(toggleComplete(_id));
   };
   return (
     <div className='bg-white rounded-md flex justify-between items-center p-3 border'>
@@ -25,6 +32,9 @@ const TodoCard = ({ title, description, id, isCompleted }: TTodoCardProps) => {
       />
       <p className='font-semibold'>{title}</p>
       {/* <p>Time</p> */}
+      <div>
+        <p>{priority}</p>
+      </div>
       <div>
         {isCompleted ? (
           <p className='text-green-500'>Done</p>
